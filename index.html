@@ -62,8 +62,8 @@
     .nav {
       min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
     }
-    .brand { font-size: 1.25rem; font-weight: 700; letter-spacing: -.07em; }
-    .brand span { color: var(--yellow); }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img { display: block; width: 130px; height: auto; }
     .nav-links { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 30px); }
     .nav-links a {
       color: #c8c8c2; font-size: .78rem; font-weight: 500;
@@ -110,6 +110,45 @@
     .facility li, .offer li { color: #c9c9c3; padding: 9px 0; border-bottom: 1px solid #292925; font-size: .92rem; }
     .facility li:last-child, .offer li:last-child { border-bottom: 0; }
     .facility li::before, .offer li::before { content: "+"; color: var(--yellow); margin-right: 12px; font-weight: 600; }
+    .cafe-layout {
+      display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      align-items: center; gap: clamp(36px, 7vw, 88px);
+    }
+    .cafe-copy h2 { max-width: 560px; }
+    .cafe-tagline {
+      color: var(--text); font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      line-height: 1.35; margin-bottom: 22px;
+    }
+    .cafe-description { max-width: 560px; margin-bottom: 0; }
+    .cafe-carousel { min-width: 0; }
+    .cafe-viewport {
+      aspect-ratio: 4 / 3; overflow: hidden; position: relative;
+      background: var(--panel); touch-action: pan-y;
+    }
+    .cafe-track {
+      display: flex; height: 100%;
+      transition: transform .55s cubic-bezier(.22, .61, .36, 1);
+    }
+    .cafe-slide { flex: 0 0 100%; height: 100%; }
+    .cafe-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .cafe-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 18px;
+    }
+    .cafe-arrow {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 42px; height: 42px; padding: 0; border: 1px solid var(--line);
+      border-radius: 50%; background: transparent; color: var(--text);
+      font: inherit; font-size: 1.5rem; cursor: pointer;
+      transition: border-color .2s ease, color .2s ease;
+    }
+    .cafe-arrow:hover { border-color: var(--yellow); color: var(--yellow); }
+    .cafe-dots { display: flex; align-items: center; gap: 10px; }
+    .cafe-dot {
+      width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%;
+      background: #666660; cursor: pointer; transition: background .2s ease, transform .2s ease;
+    }
+    .cafe-dot[aria-current="true"] { background: var(--yellow); transform: scale(1.2); }
     .offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .offer { background: var(--panel); border: 1px solid var(--line); padding: 32px; }
     .offer h3 { color: var(--yellow); }
@@ -143,6 +182,7 @@
       .nav-links a { font-size: .7rem; }
       .nav-cta { display: none; }
       .hero-grid, .two-col { grid-template-columns: 1fr; gap: 35px; }
+      .cafe-layout { grid-template-columns: 1fr; gap: 35px; }
       .hero { min-height: auto; padding: 90px 0 65px; }
       .hero-aside { margin: 0; }
       .cards { grid-template-columns: repeat(2, 1fr); }
@@ -166,15 +206,19 @@
       footer .wrap { display: block; }
       footer span { display: block; margin-top: 8px; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      .cafe-track { transition: none; }
+    }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="wrap nav">
-      <a class="brand" href="#inicio" aria-label="CasaBeco, início">CASA<span>BECO</span></a>
+      <a class="brand" href="#inicio" aria-label="CasaBeco, início"><img src="imgs/logo/casabeco-logo-transp.png" alt=""></a>
       <nav class="nav-links" aria-label="Navegação principal">
         <a href="#sobre">A Casa</a>
         <a href="#estrutura">Estrutura</a>
+        <a href="#cafe">Café Beco</a>
         <a href="#experiencias">Experiências</a>
         <a href="#projetos">Projetos e parcerias</a>
         <a href="#contato">Contato</a>
@@ -259,6 +303,45 @@
               <li>Recursos para experiências de pintura e atividades artísticas</li>
             </ul>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cafe">
+      <div class="wrap cafe-layout">
+        <div class="cafe-copy">
+          <div class="eyebrow">Café Beco</div>
+          <h2>Café Beco. <span class="accent">Uma pausa que também é experiência.</span></h2>
+          <p class="cafe-tagline">Café, encontros e boas ideias no coração do Beco do Batman.</p>
+          <p class="cafe-description">O Café Beco completa a experiência da CasaBeco com um ambiente acolhedor para fazer uma pausa, encontrar pessoas e aproveitar o melhor do espaço. Do café tradicional às opções geladas, passando por diferentes preparos e drinks alcoólicos, o cardápio oferece alternativas para diferentes momentos do dia. Um convite para apreciar, conversar e aproveitar a atmosfera criativa da Vila Madalena.</p>
+        </div>
+        <div class="cafe-carousel" data-cafe-carousel role="region" aria-label="Galeria de fotos do Café Beco">
+          <div class="cafe-viewport" aria-live="polite">
+            <div class="cafe-track">
+              <div class="cafe-slide" role="group" aria-roledescription="slide" aria-label="1 de 4" aria-hidden="false">
+                <img src="imgs/cafebeco/cafebeco1.JPEG" alt="Bebida servida no Café Beco">
+              </div>
+              <div class="cafe-slide" role="group" aria-roledescription="slide" aria-label="2 de 4" aria-hidden="true">
+                <img src="imgs/cafebeco/cafebeco2.JPEG" alt="Preparo de café no Café Beco">
+              </div>
+              <div class="cafe-slide" role="group" aria-roledescription="slide" aria-label="3 de 4" aria-hidden="true">
+                <img src="imgs/cafebeco/cafebeco3.JPEG" alt="Registro do Café Beco">
+              </div>
+              <div class="cafe-slide" role="group" aria-roledescription="slide" aria-label="4 de 4" aria-hidden="true">
+                <img src="imgs/cafebeco/cafebeco4.JPEG" alt="Registro do Café Beco">
+              </div>
+            </div>
+          </div>
+          <div class="cafe-controls">
+            <button class="cafe-arrow" type="button" data-cafe-previous aria-label="Foto anterior">‹</button>
+            <div class="cafe-dots" aria-label="Selecionar foto">
+              <button class="cafe-dot" type="button" data-cafe-dot aria-label="Ir para a foto 1" aria-current="true"></button>
+              <button class="cafe-dot" type="button" data-cafe-dot aria-label="Ir para a foto 2" aria-current="false"></button>
+              <button class="cafe-dot" type="button" data-cafe-dot aria-label="Ir para a foto 3" aria-current="false"></button>
+              <button class="cafe-dot" type="button" data-cafe-dot aria-label="Ir para a foto 4" aria-current="false"></button>
+            </div>
+            <button class="cafe-arrow" type="button" data-cafe-next aria-label="Próxima foto">›</button>
+          </div>
         </div>
       </div>
     </section>
@@ -425,5 +508,49 @@
       <span>Beco do Batman · São Paulo, Brasil</span>
     </div>
   </footer>
+  <script>
+    const cafeCarousel = document.querySelector("[data-cafe-carousel]");
+    if (cafeCarousel) {
+      const cafeViewport = cafeCarousel.querySelector(".cafe-viewport");
+      const cafeTrack = cafeCarousel.querySelector(".cafe-track");
+      const cafeSlides = Array.from(cafeCarousel.querySelectorAll(".cafe-slide"));
+      const cafeDots = Array.from(cafeCarousel.querySelectorAll("[data-cafe-dot]"));
+      let cafeIndex = 0;
+      let cafeTouchStartX = null;
+
+      const showCafeSlide = (index) => {
+        cafeIndex = (index + cafeSlides.length) % cafeSlides.length;
+        cafeTrack.style.transform = `translateX(-${cafeIndex * 100}%)`;
+        cafeSlides.forEach((slide, slideIndex) => {
+          slide.setAttribute("aria-hidden", String(slideIndex !== cafeIndex));
+          cafeDots[slideIndex].setAttribute("aria-current", String(slideIndex === cafeIndex));
+        });
+      };
+
+      cafeCarousel.querySelector("[data-cafe-previous]").addEventListener("click", () => {
+        showCafeSlide(cafeIndex - 1);
+      });
+      cafeCarousel.querySelector("[data-cafe-next]").addEventListener("click", () => {
+        showCafeSlide(cafeIndex + 1);
+      });
+      cafeDots.forEach((dot, index) => {
+        dot.addEventListener("click", () => showCafeSlide(index));
+      });
+      cafeViewport.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch") cafeTouchStartX = event.clientX;
+      });
+      cafeViewport.addEventListener("pointerup", (event) => {
+        if (cafeTouchStartX === null) return;
+        const swipeDistance = event.clientX - cafeTouchStartX;
+        if (Math.abs(swipeDistance) > 40) {
+          showCafeSlide(cafeIndex + (swipeDistance < 0 ? 1 : -1));
+        }
+        cafeTouchStartX = null;
+      });
+      cafeViewport.addEventListener("pointercancel", () => {
+        cafeTouchStartX = null;
+      });
+    }
+  </script>
 </body>
 </html>
