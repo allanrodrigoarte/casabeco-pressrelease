@@ -69,15 +69,24 @@
       color: #c8c8c2; font-size: .78rem; font-weight: 500;
       transition: color .2s ease;
     }
-    .nav-links a:hover { color: var(--yellow); }
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a[aria-current="location"] { color: var(--yellow); }
+    .nav-links a[aria-current="location"] { position: relative; }
+    .nav-links a[aria-current="location"]::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -9px;
+      height: 2px; background: var(--yellow);
+    }
     .nav-cta, .button {
       display: inline-flex; align-items: center; justify-content: center;
       background: var(--yellow); color: #080808; font-weight: 700;
       padding: 13px 19px; border: 1px solid var(--yellow);
-      transition: transform .2s ease, background .2s ease;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
     }
     .nav-cta { font-size: .76rem; white-space: nowrap; }
     .nav-cta:hover, .button:hover { transform: translateY(-2px); background: #fff900; }
+    .nav-cta:active, .button:active { transform: translateY(0); box-shadow: inset 0 2px 5px rgba(0,0,0,.2); }
+    .nav-cta:focus-visible, .button:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; }
     .hero { padding: 112px 0 84px; min-height: 690px; display: flex; align-items: center; }
     .hero h1 { width: 100%; margin: clamp(36px, 5vw, 62px) 0 clamp(56px, 8vw, 96px); }
     .hero-grid {
@@ -160,6 +169,37 @@
     .offer { background: var(--panel); border: 1px solid var(--line); padding: 32px; }
     .offer h3 { color: var(--yellow); }
     .offer p { font-size: .92rem; }
+    .offer-list { list-style: none; padding: 0; margin: 22px 0 0; border-top: 1px solid var(--line); }
+    .offer-list li { border-bottom: 1px solid var(--line); }
+    .offer-list details { width: 100%; }
+    .offer-list summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      min-height: 54px; padding: 12px 0; color: #d8d8d2; font-size: .92rem;
+      cursor: pointer; list-style: none; transition: color .2s ease;
+    }
+    .offer-list summary::-webkit-details-marker { display: none; }
+    .offer-list summary:hover, .offer-list summary:focus-visible,
+    .offer-list details[open] summary { color: var(--yellow); }
+    .offer-list summary:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
+    .offer-toggle {
+      display: inline-flex; flex: 0 0 28px; width: 28px; height: 28px;
+      align-items: center; justify-content: center; border: 1px solid var(--line);
+      border-radius: 50%; color: var(--yellow); font-size: 1.15rem; line-height: 1;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .offer-list details[open] .offer-toggle { transform: rotate(45deg); background: var(--yellow); color: var(--black); }
+    .offer-detail { max-width: 52ch; padding: 0 38px 16px 0; color: var(--muted); font-size: .84rem; line-height: 1.65; }
+    .offer-detail p { margin: 0; color: var(--muted); }
+    .art-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+    .art-pillar { padding: 24px; background: var(--panel); border: 1px solid var(--line); }
+    .art-pillar h3 { color: var(--yellow); }
+    .art-pillar p { margin: 0; font-size: .9rem; }
+    .cafe-menu { margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line); }
+    .cafe-menu h3 { margin-bottom: 14px; }
+    .cafe-menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .cafe-menu-item { padding: 18px; background: var(--panel); border: 1px solid var(--line); }
+    .cafe-menu-item strong { display: block; color: var(--yellow); margin-bottom: 8px; font-size: .9rem; }
+    .cafe-menu-item p { margin: 0; font-size: .82rem; }
     .audience-band {
       background: var(--yellow); color: #080808; padding: 48px;
       display: grid; grid-template-columns: .8fr 1.2fr; gap: 50px; align-items: center;
@@ -193,7 +233,39 @@
       .hero { min-height: auto; padding: 90px 0 65px; }
       .hero-aside { margin: 0; }
       .cards { grid-template-columns: repeat(2, 1fr); }
-      .audience-band { grid-template-columns: 1fr; gap: 20px; padding: 34px; }
+      .art-pillars, .cafe-menu-grid { grid-template-columns: 1fr 1fr; }
+      .offer-list { list-style: none; padding: 0; margin: 22px 0 0; border-top: 1px solid var(--line); }
+    .offer-list li { border-bottom: 1px solid var(--line); }
+    .offer-list details { width: 100%; }
+    .offer-list summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      min-height: 54px; padding: 12px 0; color: #d8d8d2; font-size: .92rem;
+      cursor: pointer; list-style: none; transition: color .2s ease;
+    }
+    .offer-list summary::-webkit-details-marker { display: none; }
+    .offer-list summary:hover, .offer-list summary:focus-visible,
+    .offer-list details[open] summary { color: var(--yellow); }
+    .offer-list summary:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
+    .offer-toggle {
+      display: inline-flex; flex: 0 0 28px; width: 28px; height: 28px;
+      align-items: center; justify-content: center; border: 1px solid var(--line);
+      border-radius: 50%; color: var(--yellow); font-size: 1.15rem; line-height: 1;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .offer-list details[open] .offer-toggle { transform: rotate(45deg); background: var(--yellow); color: var(--black); }
+    .offer-detail { max-width: 52ch; padding: 0 38px 16px 0; color: var(--muted); font-size: .84rem; line-height: 1.65; }
+    .offer-detail p { margin: 0; color: var(--muted); }
+    .art-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+    .art-pillar { padding: 24px; background: var(--panel); border: 1px solid var(--line); }
+    .art-pillar h3 { color: var(--yellow); }
+    .art-pillar p { margin: 0; font-size: .9rem; }
+    .cafe-menu { margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line); }
+    .cafe-menu h3 { margin-bottom: 14px; }
+    .cafe-menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .cafe-menu-item { padding: 18px; background: var(--panel); border: 1px solid var(--line); }
+    .cafe-menu-item strong { display: block; color: var(--yellow); margin-bottom: 8px; font-size: .9rem; }
+    .cafe-menu-item p { margin: 0; font-size: .82rem; }
+    .audience-band { grid-template-columns: 1fr; gap: 20px; padding: 34px; }
     }
     @media (max-width: 580px) {
       .wrap { width: min(100% - 32px, var(--max)); }
@@ -206,7 +278,7 @@
       .hero-copy { gap: 28px; }
       .hero-aside { margin: 0; }
       .stats { grid-template-columns: repeat(2, 1fr); }
-      .cards, .facility-grid, .offer-grid, .steps { grid-template-columns: 1fr; }
+      .cards, .facility-grid, .offer-grid, .steps, .art-pillars, .cafe-menu-grid { grid-template-columns: 1fr; }
       .card { min-height: auto; }
       .card-index { margin-bottom: 22px; }
       .contact { padding: 78px 0; }
@@ -217,13 +289,14 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .cafe-track { transition: none; }
+      .nav-links a, .button, .nav-cta, .offer-list summary { transition: none; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="wrap nav">
-      <a class="brand" href="#inicio" aria-label="CasaBeco, início"><img src="imgs/logo/casabeco-logo-transp.png" alt=""></a>
+      <a class="brand" href="#inicio" aria-label="CasaBeco, início"><img src="imgs/logo/casabeco-logo-transp.png" alt="CasaBeco"></a>
       <nav class="nav-links" aria-label="Navegação principal">
         <a href="#sobre">A Casa</a>
         <a href="#estrutura">Estrutura</a>
@@ -278,7 +351,8 @@
         </div>
         <div>
           <p class="manifesto">No coração do Beco do Batman, a CasaBeco conecta a cena artística independente a <em>experiências participativas, iniciativas criativas e novas oportunidades.</em></p>
-          <p>Mais do que um espaço de exposição, somos um ambiente de convivência, experimentação e colaboração. Reunimos obras de diferentes artistas, experiências de pintura, oficinas, moda independente e atividades que convidam o público a participar.</p>
+          <p>Mais do que um espaço de exposição, somos um ambiente de convivência, experimentação e colaboração. Reunimos obras de diferentes artistas, experiências de pintura, oficinas, moda independente, produtos autorais e atividades que convidam o público a participar.</p>
+          <p>A CasaBeco integra dois universos complementares: Arte, com experiências, obras e materiais criativos; e Café, com bebidas, comidas e um ambiente para encontros e permanência.</p>
           <p>Nossa localização nos coloca em contato com um território reconhecido pela arte urbana e pelo turismo cultural, criando possibilidades de visibilidade e conexão para projetos e parceiros.</p>
         </div>
       </div>
@@ -320,9 +394,17 @@
       <div class="wrap cafe-layout">
         <div class="cafe-copy">
           <div class="eyebrow">Café Beco</div>
-          <h2>Café Beco. <span class="accent">Uma pausa que também é experiência.</span></h2>
+          <h2>Café Beco. <span class="accent">Uma pausa que também é uma experiência.</span></h2>
           <p class="cafe-tagline">Café, encontros e boas ideias no coração do Beco do Batman.</p>
           <p class="cafe-description">O Café Beco completa a experiência da CasaBeco com um ambiente acolhedor para fazer uma pausa, encontrar pessoas e aproveitar o melhor do espaço. Do café tradicional às opções geladas, passando por diferentes preparos e drinks alcoólicos, o cardápio oferece alternativas para diferentes momentos do dia. Um convite para apreciar, conversar e aproveitar a atmosfera criativa da Vila Madalena.</p>
+          <div class="cafe-menu">
+            <h3>Um cardápio para diferentes momentos</h3>
+            <div class="cafe-menu-grid">
+              <article class="cafe-menu-item"><strong>Cafés e bebidas</strong><p>Espresso, macchiato, latte, cappuccino, mocha, chocolate quente, matcha e chai latte, além de opções geladas.</p></article>
+              <article class="cafe-menu-item"><strong>Salgados</strong><p>Enroladinho de presunto e queijo, coxinha de frango, pão de queijo com requeijão, quiches, pão de batata e esfiha de carne.</p></article>
+              <article class="cafe-menu-item"><strong>Doces e outras bebidas</strong><p>Cinnamon rolls, cookies, sucos, smoothies e opções de bebidas alcoólicas, como vinhos e cervejas.</p></article>
+            </div>
+          </div>
         </div>
         <div class="cafe-carousel" data-cafe-carousel role="region" aria-label="Galeria de fotos do Café Beco">
           <div class="cafe-viewport" aria-live="polite">
@@ -358,7 +440,7 @@
     <section class="section" id="experiencias">
       <div class="wrap">
         <div class="section-intro">
-          <div class="eyebrow">03 / O que acontece aqui</div>
+          <div class="eyebrow">04 / O que acontece aqui</div>
           <h2>Arte para ver, viver <span class="accent">e experimentar.</span></h2>
           <p>A programação e as ocupações da CasaBeco conectam diferentes linguagens e públicos, criando oportunidades para artistas, marcas e visitantes.</p>
         </div>
@@ -394,6 +476,20 @@
             <p>Um ambiente para aproximar visitantes, profissionais criativos, instituições e comunidades.</p>
           </article>
         </div>
+        <div class="art-pillars" aria-label="Frentes do núcleo artístico">
+          <article class="art-pillar">
+            <h3>Obras e produtos</h3>
+            <p>Telas e pinturas originais, prints, reproduções, roupas, objetos e produtos autorais de artistas e criadores independentes.</p>
+          </article>
+          <article class="art-pillar">
+            <h3>Suprimentos artísticos</h3>
+            <p>Tintas, papéis, telas, pincéis e materiais para pintura e desenho, relacionados às atividades criativas e à produção artística.</p>
+          </article>
+          <article class="art-pillar">
+            <h3>Artistas e colaborações</h3>
+            <p>Exposições, lançamentos, intervenções, projetos autorais e iniciativas colaborativas com artistas e coletivos.</p>
+          </article>
+        </div>
         <p class="note">O histórico da CasaBeco inclui trabalhos e iniciativas relacionados a artistas, marcas e criadores como Undelete, Rift e Nobru, além de ações de customização e experiências artísticas.</p>
       </div>
     </section>
@@ -401,7 +497,7 @@
     <section class="section" id="projetos">
       <div class="wrap">
         <div class="section-intro">
-          <div class="eyebrow">04 / Projetos e parcerias</div>
+          <div class="eyebrow">05 / Projetos e parcerias</div>
           <h2>Seu projeto pode <span class="accent">acontecer aqui.</span></h2>
           <p>A CasaBeco está disponível para receber propostas e construir parcerias com artistas, produtores culturais, instituições, empresas, marcas, coletivos e organizações.</p>
         </div>
@@ -410,44 +506,44 @@
             <div class="eyebrow">Ocupação comercial</div>
             <h3>Marcas e criadores</h3>
             <p>Opções de presença e exposição comercial em um ambiente conectado à arte e à economia criativa.</p>
-            <ul>
-              <li>Locação de mesas</li>
-              <li>Exposição em nichos</li>
-              <li>Araras para marcas de moda</li>
-              <li>Ocupações temporárias e lançamentos</li>
+            <ul class="offer-list">
+              <li><details><summary><span>Locação de mesas</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Disponibilização de mesas para apresentar e comercializar produtos, projetos ou serviços. O formato, período e condições de uso são alinhados conforme a proposta e a disponibilidade do espaço.</p></div></details></li>
+              <li><details><summary><span>Exposição em nichos</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Espaços de exposição para produtos autorais, objetos e peças de pequenos negócios. A seleção e a organização são definidas de acordo com o perfil dos produtos e a composição do ambiente.</p></div></details></li>
+              <li><details><summary><span>Araras para marcas de moda</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Área para apresentar roupas, acessórios e coleções de marcas independentes. Uma possibilidade de aproximar criadores do público que visita o Beco do Batman.</p></div></details></li>
+              <li><details><summary><span>Ocupações temporárias e lançamentos</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Ocupações por período determinado para lançamentos, apresentações e ativações. O formato é construído em conjunto, considerando agenda, estrutura e necessidades de cada iniciativa.</p></div></details></li>
             </ul>
           </article>
           <article class="offer">
             <div class="eyebrow">Eventos e experiências</div>
             <h3>Encontros sob medida</h3>
             <p>Atividades fechadas para grupos, empresas, equipes e comunidades, com formatos adaptáveis.</p>
-            <ul>
-              <li>Oficinas de pintura em tela</li>
-              <li>Oficinas de graffiti</li>
-              <li>Customização artística</li>
-              <li>Experiências para grupos de até 20 pessoas</li>
+            <ul class="offer-list">
+              <li><details><summary><span>Oficinas de pintura em tela</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Atividades práticas de pintura com orientação e materiais definidos conforme a proposta. Podem ser organizadas para iniciantes, grupos privados ou ações especiais.</p></div></details></li>
+              <li><details><summary><span>Oficinas de graffiti</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Experiências de arte urbana com introdução ao uso de spray e criação visual. As atividades podem utilizar o muro interno dedicado às oficinas, conforme o formato combinado.</p></div></details></li>
+              <li><details><summary><span>Customização artística</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Intervenções criativas em peças e objetos, aproximando participantes de técnicas e processos artísticos. O suporte e os materiais são definidos para cada atividade.</p></div></details></li>
+              <li><details><summary><span>Experiências para grupos</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Programações para empresas, equipes e grupos fechados, com referência de até 20 participantes em oficinas. A capacidade final depende do layout e da atividade.</p></div></details></li>
             </ul>
           </article>
           <article class="offer">
             <div class="eyebrow">Cultura e formação</div>
             <h3>Editais e projetos culturais</h3>
             <p>Disponibilidade para sediar atividades e colaborar com iniciativas culturais e formativas.</p>
-            <ul>
-              <li>Oficinas e ações educativas</li>
-              <li>Exposições e ocupações artísticas</li>
-              <li>Encontros e atividades públicas</li>
-              <li>Projetos incentivados e contrapartidas culturais</li>
+            <ul class="offer-list">
+              <li><details><summary><span>Oficinas e ações educativas</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Atividades de formação e mediação artística para diferentes públicos. O conteúdo, a duração e a estrutura são alinhados com os responsáveis pelo projeto.</p></div></details></li>
+              <li><details><summary><span>Exposições e ocupações artísticas</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Apresentação de obras, projetos autorais e propostas coletivas em formatos compatíveis com o espaço. A curadoria, montagem e período são definidos em conjunto.</p></div></details></li>
+              <li><details><summary><span>Encontros e atividades públicas</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Realização de conversas, encontros, apresentações e ações abertas ao público, conectando agentes culturais e visitantes.</p></div></details></li>
+              <li><details><summary><span>Projetos incentivados e contrapartidas</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Possibilidade de receber atividades vinculadas a editais e iniciativas culturais, com escopo, responsabilidades e condições acordados previamente.</p></div></details></li>
             </ul>
           </article>
           <article class="offer">
             <div class="eyebrow">Parcerias estratégicas</div>
             <h3>Instituições, marcas e investidores</h3>
             <p>Colaborações para desenvolver experiências, ampliar a programação e fortalecer a atuação da CasaBeco.</p>
-            <ul>
-              <li>Ativações e patrocínios</li>
-              <li>Lançamentos e ações de marca</li>
-              <li>Coprodução de eventos</li>
-              <li>Investimento e desenvolvimento de novas iniciativas</li>
+            <ul class="offer-list">
+              <li><details><summary><span>Ativações e patrocínios</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Parcerias para associar marcas a experiências artísticas, culturais e gastronômicas. As entregas e contrapartidas são definidas conforme os objetivos de cada ação.</p></div></details></li>
+              <li><details><summary><span>Lançamentos e ações de marca</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Apresentação de produtos, coleções e campanhas em um ambiente ligado à arte e à economia criativa. O formato pode incluir exposição, encontro ou experiência participativa.</p></div></details></li>
+              <li><details><summary><span>Coprodução de eventos</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Desenvolvimento conjunto de eventos e programações, com divisão de responsabilidades, necessidades técnicas e modelo de operação acordados entre as partes.</p></div></details></li>
+              <li><details><summary><span>Investimento e novas iniciativas</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Conversas com parceiros interessados em apoiar o desenvolvimento de novas experiências, projetos e frentes de atuação da CasaBeco.</p></div></details></li>
             </ul>
           </article>
         </div>
@@ -469,7 +565,7 @@
     <section class="section">
       <div class="wrap">
         <div class="section-intro">
-          <div class="eyebrow">05 / Como colaborar</div>
+          <div class="eyebrow">06 / Como colaborar</div>
           <h2>Da ideia à <span class="accent">realização.</span></h2>
           <p>Queremos construir relações claras e viáveis, alinhando cada proposta ao perfil do espaço e aos objetivos de quem realiza.</p>
         </div>
@@ -495,7 +591,7 @@
 
     <section class="contact" id="contato">
       <div class="wrap">
-        <div class="eyebrow">06 / Vamos conversar</div>
+        <div class="eyebrow">07 / Vamos conversar</div>
         <h2>Tem uma ideia? <span class="accent">A CasaBeco está aberta.</span></h2>
         <p class="lead">Estamos disponíveis para receber propostas de projetos, oficinas, eventos, parcerias comerciais e iniciativas culturais.</p>
         <div class="contact-row">
@@ -518,6 +614,39 @@
     </div>
   </footer>
   <script>
+    const navigationLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+    const navigationTargets = navigationLinks
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    if ("IntersectionObserver" in window && navigationTargets.length) {
+      const navigationObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navigationLinks.forEach((link) => {
+            if (link.getAttribute("href") === `#${entry.target.id}`) {
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        });
+      }, { rootMargin: "-25% 0px -65% 0px", threshold: 0 });
+      navigationTargets.forEach((target) => navigationObserver.observe(target));
+    }
+
+    document.querySelectorAll(".offer").forEach((offer) => {
+      const accordions = Array.from(offer.querySelectorAll(".offer-list details"));
+      accordions.forEach((accordion) => {
+        accordion.addEventListener("toggle", () => {
+          if (!accordion.open) return;
+          accordions.forEach((other) => {
+            if (other !== accordion) other.open = false;
+          });
+        });
+      });
+    });
+
     const cafeCarousel = document.querySelector("[data-cafe-carousel]");
     if (cafeCarousel) {
       const cafeViewport = cafeCarousel.querySelector(".cafe-viewport");
