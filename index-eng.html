@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CasaBeco is a cultural and creative space in Beco do Batman, Vila Madalena, São Paulo, welcoming projects, workshops, events, partnerships and artistic experiences.">
+  <meta name="theme-color" content="#080808">
+  <title>CasaBeco | Art, coffee, culture and experiences</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #080808;
+      --panel: #111111;
+      --panel-2: #171717;
+      --yellow: #f5ed00;
+      --text: #eeeeea;
+      --muted: #a5a5a0;
+      --line: #30302c;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--text);
+      font-family: "DM Sans", Arial, sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow {
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .72rem;
+      font-weight: 600;
+    }
+    .accent { color: var(--yellow); }
+    .muted { color: var(--muted); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.08; letter-spacing: -.045em; font-weight: 400; }
+    h1 { font-size: clamp(2.9rem, 6vw, 5.2rem); margin: 24px 0; }
+    h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); margin-bottom: 22px; }
+    h3 { font-size: 1.15rem; margin-bottom: 12px; }
+    p { color: #c9c9c3; }
+    .lead { font-size: clamp(1.1rem, 2vw, 1.42rem); line-height: 1.55; max-width: 760px; color: #d6d6d0; }
+    .section { padding: 112px 0; border-top: 1px solid var(--line); }
+    .section-intro { max-width: 720px; margin-bottom: 52px; }
+    .section-intro p { font-size: 1.08rem; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(8,8,8,.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img { display: block; width: 130px; height: auto; }
+    .nav-links { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 30px); }
+    .nav-links a {
+      color: #c8c8c2; font-size: .78rem; font-weight: 500;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a[aria-current="location"] { color: var(--yellow); }
+    .nav-links a[aria-current="location"] { position: relative; }
+    .nav-links a[aria-current="location"]::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -9px;
+      height: 2px; background: var(--yellow);
+    }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .language-switch {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--muted); font-size: .76rem; white-space: nowrap;
+    }
+    .language-switch a { transition: color .2s ease; }
+    .language-switch a:hover,
+    .language-switch a[aria-current="page"] { color: var(--yellow); }
+    .language-switch a[aria-current="page"] { font-weight: 700; }
+    .language-switch a:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+    .nav-cta, .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--yellow); color: #080808; font-weight: 700;
+      padding: 13px 19px; border: 1px solid var(--yellow);
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .nav-cta { font-size: .76rem; white-space: nowrap; }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); background: #fff900; }
+    .nav-cta:active, .button:active { transform: translateY(0); box-shadow: inset 0 2px 5px rgba(0,0,0,.2); }
+    .nav-cta:focus-visible, .button:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; }
+    .hero { padding: 112px 0 84px; min-height: 690px; display: flex; align-items: center; }
+    .hero h1 { width: 100%; margin: clamp(36px, 5vw, 62px) 0 clamp(56px, 8vw, 96px); }
+    .hero-grid {
+      display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
+      align-items: stretch; gap: clamp(32px, 8vw, 96px);
+    }
+    .hero-copy { display: flex; flex-direction: column; justify-content: space-between; gap: 36px; }
+    .hero h1 span { color: var(--yellow); }
+    .hero-aside {
+      border-left: 1px solid var(--yellow); padding: 8px 0 8px 25px;
+      max-width: 330px; margin: auto 0;
+    }
+    .hero-aside p { font-size: .98rem; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 12px 26px; margin-top: 42px; color: var(--muted); font-size: .78rem; letter-spacing: .04em; }
+    .hero-meta span::before { content: "↗"; color: var(--yellow); margin-right: 9px; }
+    .hero-rule { height: 1px; background: var(--line); margin-top: 70px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .stat { background: var(--black); padding: 28px 24px; min-height: 150px; }
+    .stat strong { display: block; color: var(--yellow); font-size: clamp(2rem, 4vw, 3.3rem); line-height: 1; font-weight: 400; letter-spacing: -.06em; }
+    .stat span { display: block; color: var(--muted); font-size: .82rem; margin-top: 13px; }
+    .note { font-size: .75rem; color: #85857f; margin-top: 14px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+    .manifesto { font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.35; letter-spacing: -.04em; color: var(--text); }
+    .manifesto em { color: var(--yellow); font-style: normal; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card {
+      background: var(--panel); border: 1px solid var(--line); padding: 28px;
+      min-height: 230px;
+    }
+    .card-index { color: var(--yellow); font-size: .72rem; letter-spacing: .14em; margin-bottom: 36px; }
+    .card p { font-size: .92rem; margin-bottom: 0; }
+    .facility-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .facility {
+      background: var(--panel); border: 1px solid var(--line); padding: 30px;
+    }
+    .facility ul, .offer ul { list-style: none; padding: 0; margin: 18px 0 0; }
+    .facility li, .offer li { color: #c9c9c3; padding: 9px 0; border-bottom: 1px solid #292925; font-size: .92rem; }
+    .facility li:last-child, .offer li:last-child { border-bottom: 0; }
+    .facility li::before { content: "+"; color: var(--yellow); margin-right: 12px; font-weight: 600; }
+    .cafe-layout {
+      display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      align-items: center; gap: clamp(36px, 7vw, 88px);
+    }
+    .cafe-copy h2 { max-width: 560px; }
+    .cafe-tagline {
+      color: var(--text); font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      line-height: 1.35; margin-bottom: 22px;
+    }
+    .cafe-description { max-width: 560px; margin-bottom: 0; }
+    .cafe-carousel { min-width: 0; }
+    .cafe-viewport {
+      aspect-ratio: 4 / 3; overflow: hidden; position: relative;
+      background: var(--panel); touch-action: pan-y;
+    }
+    .cafe-track {
+      display: flex; height: 100%;
+      transition: transform .55s cubic-bezier(.22, .61, .36, 1);
+    }
+    .cafe-slide { flex: 0 0 100%; height: 100%; }
+    .cafe-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .cafe-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 18px;
+    }
+    .cafe-arrow {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 42px; height: 42px; padding: 0; border: 1px solid var(--line);
+      border-radius: 50%; background: transparent; color: var(--text);
+      font: inherit; font-size: 1.5rem; cursor: pointer;
+      transition: border-color .2s ease, color .2s ease;
+    }
+    .cafe-arrow:hover { border-color: var(--yellow); color: var(--yellow); }
+    .cafe-dots { display: flex; align-items: center; gap: 10px; }
+    .cafe-dot {
+      width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%;
+      background: #666660; cursor: pointer; transition: background .2s ease, transform .2s ease;
+    }
+    .cafe-dot[aria-current="true"] { background: var(--yellow); transform: scale(1.2); }
+    .offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .offer { background: var(--panel); border: 1px solid var(--line); padding: 32px; }
+    .offer h3 { color: var(--yellow); }
+    .offer p { font-size: .92rem; }
+    .offer-list { list-style: none; padding: 0; margin: 22px 0 0; border-top: 1px solid var(--line); }
+    .offer-list li { border-bottom: 1px solid var(--line); }
+    .offer-list details { width: 100%; }
+    .offer-list summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      min-height: 54px; padding: 12px 0; color: #d8d8d2; font-size: .92rem;
+      cursor: pointer; list-style: none; transition: color .2s ease;
+    }
+    .offer-list summary::-webkit-details-marker { display: none; }
+    .offer-list summary:hover, .offer-list summary:focus-visible,
+    .offer-list details[open] summary { color: var(--yellow); }
+    .offer-list summary:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
+    .offer-toggle {
+      display: inline-flex; flex: 0 0 28px; width: 28px; height: 28px;
+      align-items: center; justify-content: center; border: 1px solid var(--line);
+      border-radius: 50%; color: var(--yellow); font-size: 1.15rem; line-height: 1;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .offer-list details[open] .offer-toggle { transform: rotate(45deg); background: var(--yellow); color: var(--black); }
+    .offer-detail { max-width: 52ch; padding: 0 38px 16px 0; color: var(--muted); font-size: .84rem; line-height: 1.65; }
+    .offer-detail p { margin: 0; color: var(--muted); }
+    .art-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+    .art-pillar { padding: 24px; background: var(--panel); border: 1px solid var(--line); }
+    .art-pillar h3 { color: var(--yellow); }
+    .art-pillar p { margin: 0; font-size: .9rem; }
+    .cafe-menu { margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line); }
+    .cafe-menu h3 { margin-bottom: 14px; }
+    .cafe-menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .cafe-menu-item { padding: 18px; background: var(--panel); border: 1px solid var(--line); }
+    .cafe-menu-item strong { display: block; color: var(--yellow); margin-bottom: 8px; font-size: .9rem; }
+    .cafe-menu-item p { margin: 0; font-size: .82rem; }
+    .audience-band {
+      background: var(--yellow); color: #080808; padding: 48px;
+      display: grid; grid-template-columns: .8fr 1.2fr; gap: 50px; align-items: center;
+    }
+    .audience-band .eyebrow { color: #292900; }
+    .audience-band h2 { margin: 0; }
+    .audience-band p { color: #292900; margin: 0; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; counter-reset: steps; }
+    .step { border-top: 1px solid var(--yellow); padding-top: 20px; }
+    .step strong { display: block; color: var(--yellow); font-size: .75rem; letter-spacing: .14em; margin-bottom: 18px; }
+    .step p { font-size: .9rem; margin-bottom: 0; }
+    .contact {
+      padding: 110px 0; background: var(--panel);
+      border-top: 1px solid var(--line);
+    }
+    .contact h2 { max-width: 780px; }
+    .contact-row { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-top: 45px; }
+    .contact-details { color: var(--muted); font-size: .9rem; }
+    .contact-details strong { color: var(--text); font-weight: 500; }
+    .button { font-size: .85rem; }
+    footer { padding: 26px 0; color: #777771; font-size: .75rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 20px; }
+    .mobile-menu { display: none; }
+    @media (max-width: 980px) {
+      .nav-cta { display: none; }
+    }
+    @media (max-width: 850px) {
+      .nav { align-items: flex-start; padding: 18px 0; }
+      .nav-links { gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+      .nav-links a { font-size: .7rem; }
+      .nav-cta { display: none; }
+      .hero-grid, .two-col { grid-template-columns: 1fr; gap: 35px; }
+      .cafe-layout { grid-template-columns: 1fr; gap: 35px; }
+      .hero { min-height: auto; padding: 90px 0 65px; }
+      .hero-aside { margin: 0; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .art-pillars, .cafe-menu-grid { grid-template-columns: 1fr 1fr; }
+      .offer-list { list-style: none; padding: 0; margin: 22px 0 0; border-top: 1px solid var(--line); }
+    .offer-list li { border-bottom: 1px solid var(--line); }
+    .offer-list details { width: 100%; }
+    .offer-list summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      min-height: 54px; padding: 12px 0; color: #d8d8d2; font-size: .92rem;
+      cursor: pointer; list-style: none; transition: color .2s ease;
+    }
+    .offer-list summary::-webkit-details-marker { display: none; }
+    .offer-list summary:hover, .offer-list summary:focus-visible,
+    .offer-list details[open] summary { color: var(--yellow); }
+    .offer-list summary:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
+    .offer-toggle {
+      display: inline-flex; flex: 0 0 28px; width: 28px; height: 28px;
+      align-items: center; justify-content: center; border: 1px solid var(--line);
+      border-radius: 50%; color: var(--yellow); font-size: 1.15rem; line-height: 1;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .offer-list details[open] .offer-toggle { transform: rotate(45deg); background: var(--yellow); color: var(--black); }
+    .offer-detail { max-width: 52ch; padding: 0 38px 16px 0; color: var(--muted); font-size: .84rem; line-height: 1.65; }
+    .offer-detail p { margin: 0; color: var(--muted); }
+    .art-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+    .art-pillar { padding: 24px; background: var(--panel); border: 1px solid var(--line); }
+    .art-pillar h3 { color: var(--yellow); }
+    .art-pillar p { margin: 0; font-size: .9rem; }
+    .cafe-menu { margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line); }
+    .cafe-menu h3 { margin-bottom: 14px; }
+    .cafe-menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .cafe-menu-item { padding: 18px; background: var(--panel); border: 1px solid var(--line); }
+    .cafe-menu-item strong { display: block; color: var(--yellow); margin-bottom: 8px; font-size: .9rem; }
+    .cafe-menu-item p { margin: 0; font-size: .82rem; }
+    .audience-band { grid-template-columns: 1fr; gap: 20px; padding: 34px; }
+    }
+    @media (max-width: 580px) {
+      .wrap { width: min(100% - 32px, var(--max)); }
+      .nav { display: block; }
+      .brand { display: inline-block; margin-bottom: 14px; }
+      .nav-links { justify-content: flex-start; gap: 10px 16px; }
+      .nav-actions { margin-top: 14px; }
+      .section { padding: 76px 0; }
+      .hero { padding: 72px 0 55px; }
+      .hero h1 { font-size: clamp(2.5rem, 8vw, 2.9rem); margin: 32px 0 44px; }
+      .hero-copy { gap: 28px; }
+      .hero-aside { margin: 0; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .cards, .facility-grid, .offer-grid, .steps, .art-pillars, .cafe-menu-grid { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
+      .card-index { margin-bottom: 22px; }
+      .contact { padding: 78px 0; }
+      .contact-row { display: block; }
+      .contact-row .button { margin-top: 28px; }
+      footer .wrap { display: block; }
+      footer span { display: block; margin-top: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cafe-track { transition: none; }
+      .nav-links a, .button, .nav-cta, .offer-list summary { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#inicio" aria-label="CasaBeco, home"><img src="imgs/logo/casabeco-logo-transp.png" alt="CasaBeco"></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#sobre">About</a>
+        <a href="#beco">The Alley</a>
+        <a href="#estrutura">The house</a>
+        <a href="#cafe">Café Beco</a>
+        <a href="#experiencias">Experiences</a>
+        <a href="#projetos">Projects &amp; Partnerships</a>
+        <a href="#contato">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="language-switch" aria-label="Language selector">
+          <a href="index.html" lang="pt-BR">PT</a>
+          <span aria-hidden="true">/</span>
+          <a href="index-eng.html" lang="en" aria-current="page">EN</a>
+        </div>
+        <a class="nav-cta" href="#contato">PRESENT YOUR PROJECT ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="wrap">
+        <div class="eyebrow">Beco do Batman · Vila Madalena · São Paulo</div>
+        <h1>Art that <span>moves.</span><br>Ideas that find space.</h1>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="lead">CasaBeco is a cultural and creative space open to new experiences, gatherings, projects and partnerships. A place to bring people closer to art and turn good ideas into real-world experiences.</p>
+            <div class="hero-meta">
+              <span>Flexible space</span>
+              <span>Art and the creative economy</span>
+              <span>Projects and events</span>
+            </div>
+          </div>
+          <aside class="hero-aside">
+            <div class="eyebrow">A space open to new possibilities</div>
+            <p>From workshops and exhibitions to brand activations, gatherings and grant-funded projects, CasaBeco welcomes proposals from artists, producers, institutions and companies.</p>
+            <a class="button" href="#projetos">Explore the possibilities ↗</a>
+          </aside>
+        </div>
+        <div class="hero-rule"></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-label="CasaBeco at a glance">
+      <div class="stats">
+        <div class="stat"><strong>108 m²</strong><span>Approximate floor area</span></div>
+        <div class="stat"><strong>100</strong><span>Reported maximum capacity</span></div>
+        <div class="stat"><strong>20</strong><span>Guests at private group events</span></div>
+        <div class="stat"><strong>5–10 thousand</strong><span>Estimated footfall in the surrounding area per weekend</span></div>
+      </div>
+      <p class="note">The footfall estimate refers to the area around Beco do Batman, not to the number of people demonstrably served by CasaBeco. The effective capacity of each event depends on the layout and applicable requirements.</p>
+    </section>
+
+    <section class="section" id="sobre">
+      <div class="wrap two-col">
+        <div>
+          <div class="eyebrow">01 / About us</div>
+          <h2>A meeting point for <span class="accent">art, people and ideas.</span></h2>
+        </div>
+        <div>
+          <p class="manifesto">At the heart of Beco do Batman, CasaBeco connects the independent arts scene with <em>participatory experiences, creative initiatives and new opportunities.</em></p>
+          <p>More than an exhibition space, CasaBeco is a place for connection, experimentation and collaboration. It brings together works by different artists, painting experiences, workshops, independent fashion, original products and activities that invite visitors to take part.</p>
+          <p>CasaBeco brings together two complementary worlds: Art, with creative experiences, artworks and supplies; and Café, with drinks, food and a welcoming place to meet and stay awhile.</p>
+          <p>Our location places us in a neighbourhood known for street art and cultural tourism, creating opportunities for projects and partners to build visibility and connections.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beco">
+      <div class="wrap two-col">
+        <div>
+          <div class="eyebrow">The Alley</div>
+          <h2>At the heart of <span class="accent">São Paulo’s urban art scene.</span></h2>
+        </div>
+        <div>
+          <p class="manifesto">CasaBeco is located in Beco do Batman, one of the city’s main meeting points for art, culture and creativity.</p>
+          <p>Located in Vila Madalena, Beco do Batman is an open-air urban art gallery, known for its graffiti murals, artistic interventions and ever-changing walls. Since the 1980s, it has brought together artists, visitors and people interested in different expressions of urban culture, becoming a landmark in São Paulo’s cultural and tourism landscape.</p>
+          <p>This is where CasaBeco is based. Its main entrance opens directly onto Beco do Batman, welcoming visitors into one of Brazil’s best-known urban art circuits. The location connects the CasaBeco experience with the artists, tourists, residents and creators who move through the area.</p>
+          <p>Alongside its main entrance from the Beco, CasaBeco has a secondary entrance at Rua Aspicuelta, 99, for production, staff and operational support. This setup helps organise events, workshops, installations and special projects while keeping the venue directly connected to the public and the cultural life of the surrounding area.</p>
+          <p>More than an address, CasaBeco is part of an area where art unfolds in the streets and finds new ways to reach people.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="estrutura">
+      <div class="wrap">
+        <div class="section-intro">
+          <div class="eyebrow">02 / The house</div>
+          <h2>Flexible space for <span class="accent">different formats.</span></h2>
+          <p>At approximately 9 × 12 metres, CasaBeco has a modular layout that can be adapted to different activities, subject to the venue capacity and operating requirements.</p>
+        </div>
+        <div class="facility-grid">
+          <article class="facility">
+            <div class="eyebrow">Spaces and furniture</div>
+            <h3>A space that adapts</h3>
+            <ul>
+              <li>Up to 6 activity tables, seating up to 8 people each</li>
+              <li>10 lounge/dining tables, seating up to 4 people each</li>
+              <li>4 armchairs</li>
+              <li>Modular layout for different activities</li>
+            </ul>
+          </article>
+          <article class="facility">
+            <div class="eyebrow">Equipment and resources</div>
+            <h3>Everything you need to create and share</h3>
+            <ul>
+              <li>2 televisions and 1 sound system</li>
+              <li>Easels and large-scale painting supplies</li>
+              <li>Indoor wall dedicated to graffiti workshops</li>
+              <li>Resources for painting experiences and art activities</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cafe">
+      <div class="wrap cafe-layout">
+        <div class="cafe-copy">
+          <div class="eyebrow">Café Beco</div>
+          <h2>Café Beco. <span class="accent">A break that is an experience in its own right.</span></h2>
+          <p class="cafe-tagline">Coffee, conversations and good ideas in the heart of Beco do Batman.</p>
+          <p class="cafe-description">Café Beco completes the CasaBeco experience with a welcoming place to take a break, meet people and enjoy the space. From traditional coffee to iced options, a range of preparations and alcoholic drinks, the menu offers something for different moments of the day. Take a moment to enjoy, talk and soak up the creative atmosphere of Vila Madalena.</p>
+          <div class="cafe-menu">
+            <h3>A menu for every moment</h3>
+            <div class="cafe-menu-grid">
+              <article class="cafe-menu-item"><strong>Coffee and drinks</strong><p>Espresso, macchiato, latte, cappuccino, mocha, hot chocolate, matcha and chai latte, plus iced options.</p></article>
+              <article class="cafe-menu-item"><strong>Savoury snacks</strong><p>Ham and cheese rolls, chicken coxinhas, Brazilian cheese bread with cream cheese, quiches, potato rolls and meat esfihas.</p></article>
+              <article class="cafe-menu-item"><strong>Sweets and other drinks</strong><p>Cinnamon rolls, cookies, juices, smoothies and alcoholic drinks, including wine and beer.</p></article>
+            </div>
+          </div>
+        </div>
+        <div class="cafe-carousel" data-cafe-carousel role="region" aria-label="Café Beco photo gallery">
+          <div class="cafe-viewport" aria-live="polite">
+            <div class="cafe-track">
+              <div class="cafe-slide" role="group" aria-roledescription="slide" aria-label="1 of 4" aria-hidden="false">
+                <img src="imgs/cafebeco/cafebeco1.JPEG" alt="A drink served at Café Beco">
+              </div>
+              <div class="cafe-slide" role="group" aria-roledescription="slide" aria-label="2 of 4" aria-hidden="true">
+                <img src="imgs/cafebeco/cafebeco2.JPEG" alt="Coffee being prepared at Café Beco">
+              </div>
+              <div class="cafe-slide" role="group" aria-roledescription="slide" aria-label="3 of 4" aria-hidden="true">
+                <img src="imgs/cafebeco/cafebeco3.JPEG" alt="A view of Café Beco">
+              </div>
+              <div class="cafe-slide" role="group" aria-roledescription="slide" aria-label="4 of 4" aria-hidden="true">
+                <img src="imgs/cafebeco/cafebeco4.JPEG" alt="A view of Café Beco">
+              </div>
+            </div>
+          </div>
+          <div class="cafe-controls">
+            <button class="cafe-arrow" type="button" data-cafe-previous aria-label="Previous photo">‹</button>
+            <div class="cafe-dots" aria-label="Select photo">
+              <button class="cafe-dot" type="button" data-cafe-dot aria-label="Go to photo 1" aria-current="true"></button>
+              <button class="cafe-dot" type="button" data-cafe-dot aria-label="Go to photo 2" aria-current="false"></button>
+              <button class="cafe-dot" type="button" data-cafe-dot aria-label="Go to photo 3" aria-current="false"></button>
+              <button class="cafe-dot" type="button" data-cafe-dot aria-label="Go to photo 4" aria-current="false"></button>
+            </div>
+            <button class="cafe-arrow" type="button" data-cafe-next aria-label="Next photo">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experiencias">
+      <div class="wrap">
+        <div class="section-intro">
+          <div class="eyebrow">04 / What happens here</div>
+          <h2>Art to see, experience <span class="accent">and explore.</span></h2>
+          <p>CasaBeco brings together different art forms and audiences, creating opportunities for artists, brands and visitors.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-index">01 — VISUAL ARTS</div>
+            <h3>Artworks and exhibitions</h3>
+            <p>Featuring work by artists, pieces from the CasaBeco collection and exhibitions in a range of formats.</p>
+          </article>
+          <article class="card">
+            <div class="card-index">02 — EXPERIENCES</div>
+            <h3>Painting and creativity</h3>
+            <p>Guided canvas painting, drawing and creative activities for a range of audiences.</p>
+          </article>
+          <article class="card">
+            <div class="card-index">03 — STREET ART</div>
+            <h3>Graffiti workshops</h3>
+            <p>Hands-on activities at the indoor wall, with room to learn, experiment and create together.</p>
+          </article>
+          <article class="card">
+            <div class="card-index">04 — FASHION</div>
+            <h3>Independent fashion</h3>
+            <p>Showcasing clothing and products by independent brands and makers, alongside garment customisation experiences.</p>
+          </article>
+          <article class="card">
+            <div class="card-index">05 — COLLABORATION</div>
+            <h3>Independent projects</h3>
+            <p>Gatherings, interventions, launches and collaborative projects with artists and collectives.</p>
+          </article>
+          <article class="card">
+            <div class="card-index">06 — COMMUNITY</div>
+            <h3>Connections and gatherings</h3>
+            <p>A place to bring visitors, creative professionals, institutions and communities together.</p>
+          </article>
+        </div>
+        <div class="art-pillars" aria-label="Creative areas">
+          <article class="art-pillar">
+            <h3>Artworks and products</h3>
+            <p>Original paintings, prints and reproductions, clothing, objects and original products by independent artists and makers.</p>
+          </article>
+          <article class="art-pillar">
+            <h3>Art supplies</h3>
+            <p>Paints, paper, canvases, brushes and supplies for painting and drawing, supporting creative activities and artistic practice.</p>
+          </article>
+          <article class="art-pillar">
+            <h3>Artists and collaborations</h3>
+            <p>Exhibitions, launches, interventions, independent projects and collaborations with artists and collectives.</p>
+          </article>
+        </div>
+        <p class="note">CasaBeco has worked on projects and initiatives with artists, brands and makers such as Undelete, Rift and Nobru, as well as customisation activities and art experiences.</p>
+      </div>
+    </section>
+
+    <section class="section" id="projetos">
+      <div class="wrap">
+        <div class="section-intro">
+          <div class="eyebrow">05 / Projects and partnerships</div>
+          <h2>Your project can <span class="accent">happen here.</span></h2>
+          <p>Explore CasaBeco’s options for retail, workshops and events. Terms vary by format and proposal.</p>
+        </div>
+        <div class="offer-grid">
+          <article class="offer">
+            <div class="eyebrow">Commercial opportunities</div>
+            <h3>Brands and makers</h3>
+            <p>Ways to showcase and sell products or host a workshop at CasaBeco.</p>
+            <ul class="offer-list">
+              <li><details><summary><span>Workshop table rental</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Reserve a table for two hours for R$ 300. It can accommodate up to 10 participants, depending on the activity. The artist or instructor sets the ticket price, manages registration and payments, and keeps 100% of the proceeds. They also bring the materials and lead the workshop. CasaBeco books the table and remains open to the public during the workshop; the time is arranged when booking.</p></div></details></li>
+              <li><details><summary><span>Display niches</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Each niche measures 45 × 45 × 30 cm and costs R$ 300 per month, with the option to renew. Schedule your delivery and set up the display with the CasaBeco team.</p></div></details></li>
+              <li><details><summary><span>Clothing rails for fashion brands</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Display up to three garments for R$ 300 per month. Schedule the delivery and arrange the display with the CasaBeco team.</p></div></details></li>
+              <li><details><summary><span>Temporary pop-ups and launches</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Book CasaBeco for a launch, collection presentation or brand activation, either open to the public or exclusively for invited guests. The time and duration are arranged in advance; pricing is quoted according to the format and event requirements.</p></div></details></li>
+            </ul>
+            <p class="note">CasaBeco handles sales of products displayed in niches and on clothing rails and deducts 22% from the sales value: 17% for taxes and 5% for card-processing fees. The remaining amount is paid on the last business day of the month following the sale.</p>
+          </article>
+          <article class="offer">
+            <div class="eyebrow">Events and experiences</div>
+            <h3>Tailored experiences</h3>
+            <p>Art experiences to enjoy individually or as part of a private group event.</p>
+            <ul class="offer-list">
+              <li><details><summary><span>Canvas painting · Art Experience</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Choose a self-guided session for R$ 120 per person or an artist-guided session for R$ 250 per person. The experience includes a canvas, easel, paint palette, brushes, paints and an apron.</p></div></details></li>
+              <li><details><summary><span>Graffiti · ZIV Walls</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>The guided spray-painting experience costs R$ 150 for 15 minutes and includes spray paint, an apron and gloves. The graffiti course costs R$ 250 and covers painting techniques, spray nozzle types and the marks they produce, with an artist as your guide.</p></div></details></li>
+              <li><details><summary><span>Eco-bag customisation</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Customise your eco-bag for R$ 120 per person in a self-guided session or R$ 250 with an artist. The eco-bag and painting materials are included.</p></div></details></li>
+              <li><details><summary><span>Private events for groups of up to 20</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Book CasaBeco for a celebration, birthday or team gathering. The group chooses an experience and has the venue exclusively for its guests. Café purchases, a food station or an open bar can be added; the quote depends on the activity, number of participants, and selected food and drink options.</p></div></details></li>
+            </ul>
+            <p class="note">Canvas painting and eco-bag customisation last two hours and are available from 10 am to 7 pm or by appointment. Café menu orders are charged separately.</p>
+          </article>
+          <article class="offer">
+            <div class="eyebrow">Culture and learning</div>
+            <h3>Cultural grants and projects</h3>
+            <p>A welcoming venue and collaborator for cultural and educational initiatives.</p>
+            <ul class="offer-list">
+              <li><details><summary><span>Workshops and educational activities</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Learning and art engagement activities for different audiences. Content, duration and setup are agreed with the project organisers.</p></div></details></li>
+              <li><details><summary><span>Exhibitions and artistic projects</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Present artworks, independent projects and collective proposals in formats suited to the venue. Curation, installation and timing are agreed together.</p></div></details></li>
+              <li><details><summary><span>Public gatherings and activities</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Host talks, gatherings, presentations and public events that connect cultural practitioners and visitors.</p></div></details></li>
+              <li><details><summary><span>Grant-funded projects and community engagement</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Host activities connected to grant programmes and cultural initiatives, with scope, responsibilities and terms agreed in advance.</p></div></details></li>
+            </ul>
+          </article>
+          <article class="offer">
+            <div class="eyebrow">Strategic partnerships</div>
+            <h3>Institutions, brands and investors</h3>
+            <p>Collaborations to develop experiences, expand the programme and strengthen CasaBeco’s work.</p>
+            <ul class="offer-list">
+              <li><details><summary><span>Brand activations and sponsorships</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Partnerships that connect brands with artistic, cultural and food experiences. Deliverables and partner benefits are defined according to each activation’s goals.</p></div></details></li>
+              <li><details><summary><span>Launches and brand activations</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Present products, collections and campaigns in a setting connected to art and the creative economy. Formats may include exhibitions, gatherings or participatory experiences.</p></div></details></li>
+              <li><details><summary><span>Event co-production</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Develop events and programmes together, with responsibilities, technical requirements and operating arrangements agreed by all parties.</p></div></details></li>
+              <li><details><summary><span>Investment and new initiatives</span><span class="offer-toggle" aria-hidden="true">+</span></summary><div class="offer-detail"><p>Conversations with partners interested in supporting new experiences, projects and areas of CasaBeco’s work.</p></div></details></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="audience-band">
+          <div>
+            <div class="eyebrow">Strategic location</div>
+            <h2>At the heart of the creative scene<br>in São Paulo.</h2>
+          </div>
+          <p>Beco do Batman is a destination known for street art and cultural tourism. An estimated 5,000 to 10,000 people pass through the surrounding area each weekend, offering visibility for initiatives that connect with this audience. Actual visibility varies by format, timing and promotion.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-intro">
+          <div class="eyebrow">06 / How to collaborate</div>
+          <h2>From idea to <span class="accent">making it happen.</span></h2>
+          <p>We aim to build clear, workable partnerships, aligning each proposal with the venue and the goals of the people behind it.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <strong>01 / SHARE YOUR IDEA</strong>
+            <h3>Tell us about your idea</h3>
+            <p>Send a brief description of the project, intended audience, preferred format and timing.</p>
+          </div>
+          <div class="step">
+            <strong>02 / PLAN TOGETHER</strong>
+            <h3>Explore the possibilities</h3>
+            <p>We review the space, schedule, technical requirements, partnership model and terms of use.</p>
+          </div>
+          <div class="step">
+            <strong>03 / MAKE IT HAPPEN</strong>
+            <h3>Bring it to life</h3>
+            <p>Once the proposal is aligned, we define responsibilities and next steps for delivery.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contato">
+      <div class="wrap">
+        <div class="eyebrow">07 / Let’s talk</div>
+        <h2>Have an idea? <span class="accent">CasaBeco is open to it.</span></h2>
+        <p class="lead">We welcome proposals for projects, workshops, events, commercial partnerships and cultural initiatives.</p>
+        <div class="contact-row">
+          <div class="contact-details">
+            <strong>CASABECO</strong><br>
+            Beco do Batman · Vila Madalena · São Paulo, SP<br>
+            Instagram: <a class="accent" href="https://www.instagram.com/casabeco99/" target="_blank" rel="noopener">@casabeco99 ↗</a><br>
+            <span class="muted">Institutional contact, email and WhatsApp: to be confirmed.</span>
+          </div>
+          <a class="button" href="https://www.instagram.com/casabeco99/" target="_blank" rel="noopener">CONTACT CASABECO ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© CasaBeco · Art, culture and experiences.</div>
+      <span>Beco do Batman · São Paulo, Brazil</span>
+    </div>
+  </footer>
+  <script>
+    const navigationLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+    const navigationTargets = navigationLinks
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    if ("IntersectionObserver" in window && navigationTargets.length) {
+      const navigationObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navigationLinks.forEach((link) => {
+            if (link.getAttribute("href") === `#${entry.target.id}`) {
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        });
+      }, { rootMargin: "-25% 0px -65% 0px", threshold: 0 });
+      navigationTargets.forEach((target) => navigationObserver.observe(target));
+    }
+
+    document.querySelectorAll(".offer").forEach((offer) => {
+      const accordions = Array.from(offer.querySelectorAll(".offer-list details"));
+      accordions.forEach((accordion) => {
+        accordion.addEventListener("toggle", () => {
+          if (!accordion.open) return;
+          accordions.forEach((other) => {
+            if (other !== accordion) other.open = false;
+          });
+        });
+      });
+    });
+
+    const cafeCarousel = document.querySelector("[data-cafe-carousel]");
+    if (cafeCarousel) {
+      const cafeViewport = cafeCarousel.querySelector(".cafe-viewport");
+      const cafeTrack = cafeCarousel.querySelector(".cafe-track");
+      const cafeSlides = Array.from(cafeCarousel.querySelectorAll(".cafe-slide"));
+      const cafeDots = Array.from(cafeCarousel.querySelectorAll("[data-cafe-dot]"));
+      let cafeIndex = 0;
+      let cafeTouchStartX = null;
+
+      const showCafeSlide = (index) => {
+        cafeIndex = (index + cafeSlides.length) % cafeSlides.length;
+        cafeTrack.style.transform = `translateX(-${cafeIndex * 100}%)`;
+        cafeSlides.forEach((slide, slideIndex) => {
+          slide.setAttribute("aria-hidden", String(slideIndex !== cafeIndex));
+          cafeDots[slideIndex].setAttribute("aria-current", String(slideIndex === cafeIndex));
+        });
+      };
+
+      cafeCarousel.querySelector("[data-cafe-previous]").addEventListener("click", () => {
+        showCafeSlide(cafeIndex - 1);
+      });
+      cafeCarousel.querySelector("[data-cafe-next]").addEventListener("click", () => {
+        showCafeSlide(cafeIndex + 1);
+      });
+      cafeDots.forEach((dot, index) => {
+        dot.addEventListener("click", () => showCafeSlide(index));
+      });
+      cafeViewport.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch") cafeTouchStartX = event.clientX;
+      });
+      cafeViewport.addEventListener("pointerup", (event) => {
+        if (cafeTouchStartX === null) return;
+        const swipeDistance = event.clientX - cafeTouchStartX;
+        if (Math.abs(swipeDistance) > 40) {
+          showCafeSlide(cafeIndex + (swipeDistance < 0 ? 1 : -1));
+        }
+        cafeTouchStartX = null;
+      });
+      cafeViewport.addEventListener("pointercancel", () => {
+        cafeTouchStartX = null;
+      });
+    }
+  </script>
+</body>
+</html>
